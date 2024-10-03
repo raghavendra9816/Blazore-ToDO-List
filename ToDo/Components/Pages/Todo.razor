@@ -1,0 +1,34 @@
+﻿@page "/todo"
+@rendermode InteractiveServer
+<h3>Todo</h3>
+
+       <!--private List<TodoItem> todos = new();-->
+    <ul>
+    @foreach (var ToDo in todos)
+    {
+        <li>
+            <input type="checkbox" @bind="ToDo.IsDone" />
+            <input @bind="ToDo.Title" />
+        </li>
+    }
+    </ul>
+
+
+        <input @bind="newTodo" />
+        <button @onclick="AddTodo">Add ToDo</button>
+
+    @code 
+    {
+      private List<TodoItem> todos = new(); //create a variable todos and store data of TodoItems
+      string newTodo = "";
+
+        void AddTodo()
+            {
+                 if (!string.IsNullOrWhiteSpace(newTodo))
+                {
+                todos.Add(new TodoItem { Title = newTodo });
+                newTodo = string.Empty;
+                }
+            }
+    
+}
